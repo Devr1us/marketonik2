@@ -29,7 +29,8 @@
             </a>
             <nav class="hidden items-center gap-6 text-sm font-medium text-zinc-400 md:flex">
                 <a class="hover:text-amber-300 {{ request()->routeIs('pembeli.dashboard') ? 'text-amber-300' : '' }}" href="{{ route('pembeli.dashboard') }}">Dashboard</a>
-                <a class="hover:text-amber-300" href="{{ route('toko.index') }}">Katalog</a>
+                <a class="hover:text-amber-300 {{ request()->routeIs('toko.*') ? 'text-amber-300' : '' }}" href="{{ route('toko.index') }}">Katalog</a>
+                <a class="hover:text-amber-300 {{ request()->routeIs('jual.*') ? 'text-amber-300' : '' }}" href="{{ route('jual.create') }}">Jual Produk</a>
                 <a class="hover:text-amber-300" href="{{ route('keranjang.index') }}">Keranjang</a>
                 <a class="hover:text-amber-300" href="{{ route('pesanan.index') }}">Pesanan</a>
             </nav>

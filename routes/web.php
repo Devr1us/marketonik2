@@ -12,6 +12,7 @@ use App\Http\Controllers\GateController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\OrderReceiptController;
 use App\Http\Controllers\Pembeli\DashboardController as PembeliDashboardController;
+use App\Http\Controllers\SellerProductController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/pengguna', [AdminUserController::class, 'index'])->name('users.index');
         Route::delete('/pengguna/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
+        Route::get('/produk/baru', [AdminProductController::class, 'create'])->name('products.create');
+        Route::post('/produk', [AdminProductController::class, 'store'])->name('products.store');
         Route::patch('/produk/{product}/toggle', [AdminProductController::class, 'toggle'])->name('products.toggle');
         Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
@@ -45,6 +48,9 @@ Route::middleware(['shop.auth', 'pembeli'])->group(function () {
 
     Route::get('/toko', [ShopController::class, 'index'])->name('toko.index');
     Route::get('/toko/produk/{product}', [ShopController::class, 'show'])->name('toko.show');
+
+    Route::get('/jual/produk/baru', [SellerProductController::class, 'create'])->name('jual.create');
+    Route::post('/jual/produk', [SellerProductController::class, 'store'])->name('jual.store');
 
     Route::get('/keranjang', [CartController::class, 'index'])->name('keranjang.index');
     Route::post('/keranjang/produk/{product}', [CartController::class, 'add'])->name('keranjang.add');

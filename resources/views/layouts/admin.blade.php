@@ -21,7 +21,8 @@
             <nav class="space-y-1 text-sm">
                 <a href="{{ route('admin.dashboard') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.dashboard') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Dashboard</a>
                 <a href="{{ route('admin.users.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.users.*') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Pembeli</a>
-                <a href="{{ route('admin.products.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.products.*') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Produk</a>
+                <a href="{{ route('admin.products.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.products.index', 'admin.products.toggle', 'admin.products.destroy') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Daftar Produk</a>
+                <a href="{{ route('admin.products.create') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.products.create') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Jual Produk</a>
                 <a href="{{ route('admin.orders.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.orders.*') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Pesanan</a>
             </nav>
             <form action="{{ route('admin.logout') }}" method="post" class="mt-10">

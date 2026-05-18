@@ -9,6 +9,12 @@
     <p class="mt-2 text-sm text-zinc-400">Dashboard pembeli — ringkasan belanja Anda.</p>
 </div>
 
+<div class="mt-8">
+    <a href="{{ route('jual.create') }}" class="inline-flex items-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-3 text-sm font-bold text-amber-100 hover:bg-amber-500/20">
+        + Jual produk baru (dengan foto)
+    </a>
+</div>
+
 <div class="mt-10 grid gap-4 sm:grid-cols-3">
     <div class="rounded-2xl border border-white/10 bg-zinc-900/40 p-5">
         <p class="text-xs text-zinc-500">Item keranjang</p>

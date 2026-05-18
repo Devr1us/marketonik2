@@ -8,10 +8,13 @@
         <h1 class="font-display text-2xl font-bold text-white">Produk</h1>
         <p class="text-sm text-zinc-500">Kelola katalog toko.</p>
     </div>
-    <form method="get" class="flex gap-2">
-        <input name="q" value="{{ $q }}" placeholder="Cari produk…" class="rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm">
-        <button class="rounded-lg bg-violet-600 px-4 py-2 text-xs font-bold text-white">Cari</button>
-    </form>
+    <div class="flex flex-wrap gap-2">
+        <a href="{{ route('admin.products.create') }}" class="rounded-lg bg-violet-600 px-4 py-2 text-xs font-bold text-white hover:brightness-110">+ Jual produk</a>
+        <form method="get" class="flex gap-2">
+            <input name="q" value="{{ $q }}" placeholder="Cari produk…" class="rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm">
+            <button class="rounded-lg border border-white/15 px-4 py-2 text-xs font-semibold text-zinc-300">Cari</button>
+        </form>
+    </div>
 </div>
 
 <div class="mt-8 space-y-3">
