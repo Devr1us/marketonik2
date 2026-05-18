@@ -5,7 +5,10 @@
 @section('content')
 <div class="grid gap-10 lg:grid-cols-2">
     <div>
-        <div class="aspect-square overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/60">
+        <div class="relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/60">
+            @if($product->discount_percent > 0)
+                <span class="absolute right-4 top-4 z-[50] inline-flex min-w-max rounded-full bg-white px-3 py-2 text-xs font-bold uppercase tracking-wide text-zinc-950 shadow-2xl shadow-black/40 ring-1 ring-black/10">Hemat {{ $product->discount_percent }}%</span>
+            @endif
             @if($product->displayImageUrl())
                 <img src="{{ $product->displayImageUrl() }}" alt="{{ $product->title }}" class="h-full w-full object-cover">
             @else

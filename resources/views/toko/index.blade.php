@@ -18,10 +18,10 @@
 <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     @forelse($products as $product)
         <a href="{{ route('toko.show', $product) }}" class="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent p-5 shadow-xl shadow-black/30 transition hover:border-amber-500/30 hover:shadow-amber-500/10">
-            @if($product->discount_percent > 0)
-                <span class="absolute right-4 top-4 rounded-full bg-amber-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-zinc-950">-{{ $product->discount_percent }}%</span>
-            @endif
-            <div class="aspect-[4/3] w-full overflow-hidden rounded-xl bg-zinc-800/80">
+            <div class="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-zinc-800/80">
+                @if($product->discount_percent > 0)
+                    <span class="absolute right-4 top-4 z-[50] inline-flex min-w-max rounded-full bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-zinc-950 shadow-2xl shadow-black/40 ring-1 ring-black/10">Hemat {{ $product->discount_percent }}%</span>
+                @endif
                 @if($product->displayImageUrl())
                     <img src="{{ $product->displayImageUrl() }}" alt="" class="h-full w-full object-cover opacity-90 transition group-hover:scale-105 group-hover:opacity-100">
                 @else

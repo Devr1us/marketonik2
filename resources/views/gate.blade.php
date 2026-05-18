@@ -12,9 +12,7 @@
         </div>
         <p class="font-display text-4xl font-extrabold tracking-tight text-white md:text-5xl">Marketonik <span class="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">Luxe</span></p>
         <p class="mt-3 text-sm text-zinc-400">Gerbang elektronik premium. Masuk atau daftar untuk melanjutkan.</p>
-        <p class="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-left text-xs text-amber-100/90">
-            <strong class="text-amber-200">Coba cepat:</strong> akun demo penjual sudah ada — username <code class="rounded bg-black/40 px-1">toko_resmi</code> atau <code class="rounded bg-black/40 px-1">mitra_elektronik</code>, password isi apa saja lalu klik Masuk.
-        </p>
+
     </div>
 
     <div class="grid gap-4 sm:grid-cols-2">
