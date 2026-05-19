@@ -12,6 +12,7 @@ class ShopController extends Controller
     {
         $q = Product::query()->with('seller')->where('is_active', true)->where('stock', '>', 0);
 
+        // Search
         if ($search = trim((string) $request->get('q'))) {
             $q->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%')
@@ -20,9 +21,40 @@ class ShopController extends Controller
             });
         }
 
-        $products = $q->orderByDesc('discount_percent')->latest()->paginate(12)->withQueryString();
+        // Category filter
+        if ($kategori = trim((string) $request->get('kategori'))) {
+            $q->where('category', $kategori);
+        }
 
-        return view('toko.index', compact('products'));
+        // Price filter
+        if ($minPrice = (int) $request->get('min_harga')) {
+            $q->whereRaw('(price * (1 - discount_percent / 100)) >= ?', [$minPrice]);
+        }
+        if ($maxPrice = (int) $request->get('max_harga')) {
+            $q->whereRaw('(price * (1 - discount_percent / 100)) <= ?', [$maxPrice]);
+        }
+
+        // Sort
+        $sort = $request->get('urut', 'terbaru');
+        match ($sort) {
+            'harga_asc'  => $q->orderByRaw('price * (1 - discount_percent / 100) ASC'),
+            'harga_desc' => $q->orderByRaw('price * (1 - discount_percent / 100) DESC'),
+            'diskon'     => $q->orderByDesc('discount_percent'),
+            default      => $q->latest(),
+        };
+
+        $products = $q->paginate(12)->withQueryString();
+
+        // Category counts for sidebar
+        $categoryCounts = Product::query()
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->selectRaw('category, count(*) as total')
+            ->groupBy('category')
+            ->pluck('total', 'category')
+            ->toArray();
+
+        return view('toko.index', compact('products', 'kategoryCounts', 'sort', 'kategori'));
     }
 
     public function show(Product $product): View
@@ -31,6 +63,25 @@ class ShopController extends Controller
 
         $product->load('seller');
 
-        return view('toko.show', compact('product'));
+        // Related products (same category, different product)
+        $related = Product::query()
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->where('category', $product->category)
+            ->where('id', '!=', $product->id)
+            ->with('seller')
+            ->take(4)
+            ->get();
+
+        // Seller's other products
+        $sellerProducts = Product::query()
+            ->where('is_active', true)
+            ->where('stock', '>', 0)
+            ->where('user_id', $product->user_id)
+            ->where('id', '!=', $product->id)
+            ->take(4)
+            ->get();
+
+        return view('toko.show', compact('product', 'related', 'sellerProducts'));
     }
 }

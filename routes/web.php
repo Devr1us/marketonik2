@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\GateController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderHistoryController;
 use App\Http\Controllers\OrderReceiptController;
 use App\Http\Controllers\Pembeli\DashboardController as PembeliDashboardController;
@@ -38,12 +39,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::patch('/pesanan/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');
+        Route::patch('/pesanan/{order}/pengiriman', [AdminOrderController::class, 'updateShipping'])->name('orders.shipping');
     });
 });
 
 Route::middleware(['shop.auth', 'pembeli'])->group(function () {
     Route::post('/keluar', [AuthController::class, 'logout'])->name('auth.logout');
 
+    Route::get('/beranda', [HomeController::class, 'index'])->name('home');
     Route::get('/dashboard', [PembeliDashboardController::class, 'index'])->name('pembeli.dashboard');
 
     Route::get('/toko', [ShopController::class, 'index'])->name('toko.index');

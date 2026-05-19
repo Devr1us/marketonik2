@@ -17,7 +17,44 @@ class Order extends Model
         'payment_method',
         'payment_status',
         'payment_note',
+        'shipping_status',
+        'shipping_address',
+        'tracking_number',
     ];
+
+    public function shippingStatusLabel(): string
+    {
+        return match ($this->shipping_status) {
+            'menunggu'  => 'Menunggu Konfirmasi',
+            'diproses'  => 'Sedang Diproses',
+            'dikirim'   => 'Dalam Pengiriman',
+            'selesai'   => 'Selesai',
+            'dibatalkan'=> 'Dibatalkan',
+            default     => ucfirst($this->shipping_status),
+        };
+    }
+
+    public function shippingStatusColor(): string
+    {
+        return match ($this->shipping_status) {
+            'menunggu'   => 'text-yellow-300 border-yellow-500/30 bg-yellow-500/10',
+            'diproses'   => 'text-sky-300 border-sky-500/30 bg-sky-500/10',
+            'dikirim'    => 'text-blue-300 border-blue-500/30 bg-blue-500/10',
+            'selesai'    => 'text-emerald-300 border-emerald-500/30 bg-emerald-500/10',
+            'dibatalkan' => 'text-rose-300 border-rose-500/30 bg-rose-500/10',
+            default      => 'text-zinc-300 border-white/15',
+        };
+    }
+
+    public function paymentStatusColor(): string
+    {
+        return match ($this->payment_status) {
+            'lunas', 'paid' => 'text-emerald-300 border-emerald-500/30 bg-emerald-500/10',
+            'menunggu', 'pending' => 'text-yellow-300 border-yellow-500/30 bg-yellow-500/10',
+            'cancelled'     => 'text-rose-300 border-rose-500/30 bg-rose-500/10',
+            default         => 'text-zinc-300 border-white/15',
+        };
+    }
 
     protected function casts(): array
     {

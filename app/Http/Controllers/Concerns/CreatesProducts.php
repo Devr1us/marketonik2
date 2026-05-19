@@ -10,17 +10,18 @@ trait CreatesProducts
     protected function validateProductData(Request $request): array
     {
         return $request->validate([
-            'title' => ['required', 'string', 'max:200'],
-            'description' => ['required', 'string', 'max:5000'],
-            'seller_location' => ['required', 'string', 'max:200'],
-            'price' => ['required', 'numeric', 'min:0'],
+            'title'            => ['required', 'string', 'max:200'],
+            'category'         => ['required', 'string', 'in:'.implode(',', Product::CATEGORIES)],
+            'description'      => ['required', 'string', 'max:5000'],
+            'seller_location'  => ['required', 'string', 'max:200'],
+            'price'            => ['required', 'numeric', 'min:0'],
             'discount_percent' => ['required', 'integer', 'min:0', 'max:90'],
-            'stock' => ['required', 'integer', 'min:0'],
-            'photo' => ['nullable', 'image', 'max:5120', 'mimes:jpeg,jpg,png,webp,gif'],
-            'spec_keys' => ['nullable', 'array'],
-            'spec_keys.*' => ['nullable', 'string', 'max:80'],
-            'spec_values' => ['nullable', 'array'],
-            'spec_values.*' => ['nullable', 'string', 'max:255'],
+            'stock'            => ['required', 'integer', 'min:0'],
+            'photo'            => ['nullable', 'image', 'max:5120', 'mimes:jpeg,jpg,png,webp,gif'],
+            'spec_keys'        => ['nullable', 'array'],
+            'spec_keys.*'      => ['nullable', 'string', 'max:80'],
+            'spec_values'      => ['nullable', 'array'],
+            'spec_values.*'    => ['nullable', 'string', 'max:255'],
         ]);
     }
 
@@ -52,17 +53,18 @@ trait CreatesProducts
         }
 
         return Product::create([
-            'user_id' => $userId,
-            'title' => $data['title'],
-            'slug' => Product::uniqueSlug($userId, $data['title']),
-            'description' => $data['description'],
-            'seller_location' => $data['seller_location'],
-            'specifications' => $this->buildSpecifications($data),
-            'price' => $data['price'],
+            'user_id'          => $userId,
+            'title'            => $data['title'],
+            'category'         => $data['category'] ?? 'Lainnya',
+            'slug'             => Product::uniqueSlug($userId, $data['title']),
+            'description'      => $data['description'],
+            'seller_location'  => $data['seller_location'],
+            'specifications'   => $this->buildSpecifications($data),
+            'price'            => $data['price'],
             'discount_percent' => $data['discount_percent'],
-            'stock' => $data['stock'],
-            'image_url' => $imagePath,
-            'is_active' => true,
+            'stock'            => $data['stock'],
+            'image_url'        => $imagePath,
+            'is_active'        => true,
         ]);
     }
 }

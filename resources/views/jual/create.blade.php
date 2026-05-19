@@ -19,6 +19,14 @@
             <input name="title" value="{{ old('title') }}" required class="mt-1 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm">
         </div>
         <div>
+            <label class="text-xs font-semibold uppercase text-zinc-500">Kategori</label>
+            <select name="category" required class="mt-1 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-zinc-300">
+                @foreach(\App\Models\Product::CATEGORIES as $cat)
+                    <option value="{{ $cat }}" {{ old('category') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <label class="text-xs font-semibold uppercase text-zinc-500">Deskripsi</label>
             <textarea name="description" rows="4" required class="mt-1 w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm">{{ old('description') }}</textarea>
         </div>

@@ -14,21 +14,46 @@
 
     <div class="flex min-h-full">
         <aside class="hidden w-64 shrink-0 border-r border-white/10 bg-black/30 p-6 lg:block">
-            <a href="{{ route('admin.dashboard') }}" class="mb-10 block">
-                <p class="font-display text-lg font-bold text-white">Marketonik</p>
-                <p class="text-xs text-violet-300/80">Panel Admin</p>
+            <a href="{{ route('admin.dashboard') }}" class="mb-10 flex items-center gap-3">
+                <span class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-zinc-200 p-1">
+                    <img src="{{ asset('images/marketonik-logo.png') }}" alt="Marketonik" class="h-7 w-7 object-contain">
+                </span>
+                <div>
+                    <p class="font-display text-base font-bold text-white leading-none">Marketonik</p>
+                    <p class="text-[10px] text-violet-300/80 mt-0.5">Panel Admin</p>
+                </div>
             </a>
-            <nav class="space-y-1 text-sm">
-                <a href="{{ route('admin.dashboard') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.dashboard') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Dashboard</a>
-                <a href="{{ route('admin.users.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.users.*') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Pembeli</a>
-                <a href="{{ route('admin.products.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.products.index', 'admin.products.toggle', 'admin.products.destroy') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Daftar Produk</a>
-                <a href="{{ route('admin.products.create') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.products.create') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Jual Produk</a>
-                <a href="{{ route('admin.orders.index') }}" class="block rounded-lg px-3 py-2 {{ request()->routeIs('admin.orders.*') ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">Pesanan</a>
+            <nav class="space-y-0.5 text-sm">
+                @foreach([
+                    ['route' => 'admin.dashboard', 'label' => 'Dashboard', 'icon' => '📊', 'match' => 'admin.dashboard'],
+                    ['route' => 'admin.orders.index', 'label' => 'Pesanan', 'icon' => '🧾', 'match' => 'admin.orders.*'],
+                    ['route' => 'admin.products.index', 'label' => 'Produk', 'icon' => '📦', 'match' => 'admin.products.index'],
+                    ['route' => 'admin.products.create', 'label' => 'Tambah Produk', 'icon' => '➕', 'match' => 'admin.products.create'],
+                    ['route' => 'admin.users.index', 'label' => 'Pembeli', 'icon' => '👥', 'match' => 'admin.users.*'],
+                ] as $nav)
+                <a href="{{ route($nav['route']) }}" class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition {{ request()->routeIs($nav['match']) ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">
+                    <span class="text-base">{{ $nav['icon'] }}</span>
+                    <span>{{ $nav['label'] }}</span>
+                </a>
+                @endforeach
             </nav>
-            <form action="{{ route('admin.logout') }}" method="post" class="mt-10">
-                @csrf
-                <button type="submit" class="w-full rounded-lg border border-white/15 px-3 py-2 text-xs font-semibold text-zinc-400 hover:border-rose-500/40 hover:text-rose-200">Keluar</button>
-            </form>
+            <div class="mt-6 border-t border-white/10 pt-6">
+                <div class="mb-4 flex items-center gap-2 px-3">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-violet-600 text-xs font-bold text-white shrink-0">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-semibold text-white truncate">{{ auth()->user()->name }}</p>
+                        <p class="text-[10px] text-zinc-500">Administrator</p>
+                    </div>
+                </div>
+                <form action="{{ route('admin.logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="flex w-full items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-xs font-semibold text-zinc-400 hover:border-rose-500/40 hover:text-rose-300 transition">
+                        <span>🚪</span> Keluar
+                    </button>
+                </form>
+            </div>
         </aside>
 
         <div class="flex flex-1 flex-col">

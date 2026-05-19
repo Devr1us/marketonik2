@@ -13,7 +13,7 @@ class GateController extends Controller
         if (Auth::check()) {
             return Auth::user()->isAdmin()
                 ? redirect()->route('admin.dashboard')
-                : redirect()->route('pembeli.dashboard');
+                : redirect()->route('home');
         }
 
         return view('gate');

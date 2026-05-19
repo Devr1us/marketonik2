@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('pembeli.dashboard')->with('ok', 'Selamat datang di Marketonik Luxe.');
+        return redirect()->route('home')->with('ok', 'Selamat datang di Marketonik Luxe.');
     }
 
     public function login(Request $request)
@@ -55,7 +55,7 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended(route('pembeli.dashboard'))->with('ok', 'Masuk berhasil.');
+        return redirect()->intended(route('home'))->with('ok', 'Masuk berhasil.');
     }
 
     public function logout(Request $request)

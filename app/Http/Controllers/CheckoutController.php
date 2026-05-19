@@ -42,7 +42,8 @@ class CheckoutController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'payment_method' => ['required', 'in:online,offline'],
+            'payment_method'   => ['required', 'in:online,offline'],
+            'shipping_address' => ['required', 'string', 'max:500'],
         ]);
 
         $items = CartItem::query()
@@ -70,14 +71,16 @@ class CheckoutController extends Controller
             : 'Pembayaran offline — silakan selesaikan transfer/kunjungan toko sesuai instruksi kasir.';
 
         $order = Order::create([
-            'user_id' => $request->user()->id,
-            'order_code' => 'MN-'.strtoupper(Str::random(10)),
-            'subtotal' => round($subtotalOriginal, 2),
-            'discount_amount' => $discountAmount,
-            'total' => $total,
-            'payment_method' => $data['payment_method'],
-            'payment_status' => $paid ? 'lunas' : 'menunggu',
-            'payment_note' => $note,
+            'user_id'          => $request->user()->id,
+            'order_code'       => 'MN-'.strtoupper(Str::random(10)),
+            'subtotal'         => round($subtotalOriginal, 2),
+            'discount_amount'  => $discountAmount,
+            'total'            => $total,
+            'payment_method'   => $data['payment_method'],
+            'payment_status'   => $paid ? 'lunas' : 'menunggu',
+            'payment_note'     => $note,
+            'shipping_status'  => 'menunggu',
+            'shipping_address' => $data['shipping_address'],
         ]);
 
         foreach ($items as $item) {

@@ -8,9 +8,21 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
+    public const CATEGORIES = [
+        'Laptop & Komputer',
+        'Smartphone',
+        'Audio & Headphone',
+        'Kamera & Foto',
+        'TV & Monitor',
+        'Gaming',
+        'Aksesoris',
+        'Lainnya',
+    ];
+
     protected $fillable = [
         'user_id',
         'title',
+        'category',
         'slug',
         'description',
         'seller_location',
