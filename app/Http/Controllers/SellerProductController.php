@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Concerns\CreatesProducts;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,6 +19,8 @@ class SellerProductController extends Controller
             'storeRoute' => route('jual.store'),
             'backRoute' => route('toko.index'),
             'pageTitle' => 'Jual produk',
+            'categories' => Category::options(),
+            'product' => null,
         ]);
     }
 

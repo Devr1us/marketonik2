@@ -75,7 +75,7 @@
     </div>
 
     {{-- Checkout form --}}
-    <form method="post" action="{{ route('checkout.store') }}" class="space-y-5">
+    <form method="post" action="{{ route('checkout.store') }}" enctype="multipart/form-data" class="space-y-5">
         @csrf
 
         {{-- Shipping address --}}
@@ -112,6 +112,12 @@
                         <span class="mt-0.5 block text-xs text-zinc-500">Bayar via transfer atau langsung di toko — status menunggu konfirmasi admin.</span>
                     </span>
                 </label>
+            </div>
+            <div class="mt-4 rounded-xl border border-white/10 bg-black/20 p-4">
+                <p class="text-xs font-semibold uppercase text-zinc-500">Instruksi Transfer</p>
+                <p class="mt-1 text-sm text-zinc-300">Bank BSI 1234567890 a.n. Marketonik. Untuk COD, bukti pembayaran boleh dikosongkan.</p>
+                <label class="mt-3 block text-xs font-semibold uppercase text-zinc-500">Bukti pembayaran</label>
+                <input type="file" name="payment_proof" accept="image/jpeg,image/png,image/webp" class="mt-2 block w-full text-sm text-zinc-400 file:mr-4 file:rounded-lg file:border-0 file:bg-amber-500/20 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-amber-200 hover:file:bg-amber-500/30">
             </div>
         </div>
 

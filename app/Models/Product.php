@@ -72,12 +72,15 @@ class Product extends Model
         return round($p * (1 - $d / 100), 2);
     }
 
-    public static function uniqueSlug(int $userId, string $title): string
+    public static function uniqueSlug(int $userId, string $title, ?int $ignoreId = null): string
     {
         $base = Str::slug($title);
         $slug = $base;
         $i = 0;
-        while (static::where('user_id', $userId)->where('slug', $slug)->exists()) {
+        while (static::where('user_id', $userId)
+            ->where('slug', $slug)
+            ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
+            ->exists()) {
             $slug = $base.'-'.(++$i);
         }
 

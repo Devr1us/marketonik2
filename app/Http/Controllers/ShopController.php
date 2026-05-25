@@ -54,7 +54,7 @@ class ShopController extends Controller
             ->pluck('total', 'category')
             ->toArray();
 
-        return view('toko.index', compact('products', 'kategoryCounts', 'sort', 'kategori'));
+        return view('toko.index', compact('products', 'categoryCounts', 'sort', 'kategori'));
     }
 
     public function show(Product $product): View

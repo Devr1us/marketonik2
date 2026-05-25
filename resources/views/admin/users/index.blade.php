@@ -33,11 +33,15 @@
                     <td class="px-4 py-3">{{ $user->orders_count }}</td>
                     <td class="px-4 py-3">{{ $user->cart_items_count }}</td>
                     <td class="px-4 py-3 text-right">
-                        <form method="post" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Hapus pembeli ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="text-xs text-rose-400 hover:text-rose-300">Hapus</button>
-                        </form>
+                        <div class="flex justify-end gap-2">
+                            <a href="{{ route('admin.users.show', $user) }}" class="text-xs text-violet-300 hover:text-violet-200">Detail</a>
+                            <a href="{{ route('admin.users.edit', $user) }}" class="text-xs text-zinc-300 hover:text-white">Edit</a>
+                            <form method="post" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Hapus pembeli ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-xs text-rose-400 hover:text-rose-300">Hapus</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @empty

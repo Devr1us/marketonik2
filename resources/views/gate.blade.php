@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Masuk — Marketonik Luxe')
+@section('title', 'Masuk — Marketonik')
 
 @section('content')
 <div class="mx-auto max-w-lg py-6 md:py-16">
@@ -10,7 +10,7 @@
                 <img src="{{ asset('images/marketonik-logo.png') }}" alt="Marketonik" width="96" height="96" class="h-20 w-20 object-contain md:h-24 md:w-24" loading="eager" decoding="async">
             </span>
         </div>
-        <p class="font-display text-4xl font-extrabold tracking-tight text-white md:text-5xl">Marketonik <span class="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">Luxe</span></p>
+        <p class="font-display text-4xl font-extrabold tracking-tight text-white md:text-5xl">Marketonik</p>
         <p class="mt-3 text-sm text-zinc-400">Gerbang elektronik premium. Masuk atau daftar untuk melanjutkan.</p>
 
     </div>

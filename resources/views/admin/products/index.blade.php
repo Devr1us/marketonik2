@@ -74,11 +74,14 @@
                     </form>
                 </td>
                 <td class="px-5 py-3">
-                    <form method="post" action="{{ route('admin.products.destroy', $product) }}" onsubmit="return confirm('Hapus produk ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="rounded-lg border border-rose-500/20 px-2.5 py-1 text-[10px] text-rose-400 hover:bg-rose-500/10 transition">Hapus</button>
-                    </form>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('admin.products.edit', $product) }}" class="rounded-lg border border-white/15 px-2.5 py-1 text-[10px] text-zinc-300 hover:border-violet-500/40 transition">Edit</a>
+                        <form method="post" action="{{ route('admin.products.destroy', $product) }}" onsubmit="return confirm('Hapus produk ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="rounded-lg border border-rose-500/20 px-2.5 py-1 text-[10px] text-rose-400 hover:bg-rose-500/10 transition">Hapus</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty

@@ -44,6 +44,7 @@ class CheckoutController extends Controller
         $data = $request->validate([
             'payment_method'   => ['required', 'in:online,offline'],
             'shipping_address' => ['required', 'string', 'max:500'],
+            'payment_proof'    => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:4096'],
         ]);
 
         $items = CartItem::query()
@@ -66,9 +67,12 @@ class CheckoutController extends Controller
         $total = round($subtotalAfter, 2);
 
         $paid = $data['payment_method'] === 'online';
+        $proofPath = $request->hasFile('payment_proof')
+            ? $request->file('payment_proof')->store('payment-proofs', 'public')
+            : null;
         $note = $paid
             ? 'Pembayaran online (simulasi) — transaksi selesai.'
-            : 'Pembayaran offline — silakan selesaikan transfer/kunjungan toko sesuai instruksi kasir.';
+            : 'Transfer ke Bank BSI 1234567890 a.n. Marketonik atau pilih COD. Admin akan mengonfirmasi pembayaran setelah bukti diterima.';
 
         $order = Order::create([
             'user_id'          => $request->user()->id,
@@ -77,8 +81,9 @@ class CheckoutController extends Controller
             'discount_amount'  => $discountAmount,
             'total'            => $total,
             'payment_method'   => $data['payment_method'],
-            'payment_status'   => $paid ? 'lunas' : 'menunggu',
+            'payment_status'   => $paid ? 'lunas' : ($proofPath ? 'menunggu' : 'pending'),
             'payment_note'     => $note,
+            'payment_proof_path' => $proofPath,
             'shipping_status'  => 'menunggu',
             'shipping_address' => $data['shipping_address'],
         ]);

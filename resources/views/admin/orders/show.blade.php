@@ -78,6 +78,11 @@
         <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-5">
             <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">Catatan Pembayaran</h3>
             <p class="text-sm text-zinc-400">{{ $order->payment_note }}</p>
+            @if($order->paymentProofUrl())
+                <a href="{{ $order->paymentProofUrl() }}" target="_blank" class="mt-3 inline-flex rounded-lg border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-200 hover:bg-amber-500/10">
+                    Lihat Bukti Pembayaran
+                </a>
+            @endif
         </div>
         @endif
 

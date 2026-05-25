@@ -1,59 +1,147 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Marketonik
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Marketonik adalah aplikasi e-commerce elektronik berbasis Laravel. Aplikasi ini dibuat untuk asesmen Pemrograman Web dan Basis Data dengan fitur login, dashboard, manajemen data, transaksi, dan rancangan database relasional.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Login dan registrasi pembeli menggunakan session Laravel.
+- Login admin dengan middleware role.
+- Dashboard pembeli dan dashboard admin.
+- Katalog produk elektronik dengan kategori, foto produk, harga, diskon, stok, dan spesifikasi.
+- Keranjang belanja, checkout, riwayat pesanan, detail pesanan, dan cetak struk.
+- Pembayaran online simulasi dan pembayaran offline dengan instruksi transfer serta upload bukti pembayaran.
+- Admin dapat mengelola produk, kategori, pembeli, pesanan, status pembayaran, status pengiriman, nomor resi, dan laporan penjualan.
+- Halaman error custom untuk 403, 404, dan 500.
+- Tampilan responsive menggunakan Blade, Tailwind CSS, dan Vite.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Akun Demo
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Admin dibuat melalui seeder `AdminSeeder`. Jalankan seeder setelah migrasi, lalu gunakan akun admin yang didefinisikan di file tersebut.
 
-## Learning Laravel
+## Cara Menjalankan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+npm run dev
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Struktur Halaman
 
-## Laravel Sponsors
+- `/` halaman gerbang login/daftar.
+- `/beranda` halaman beranda pembeli.
+- `/dashboard` dashboard pembeli.
+- `/toko` katalog produk.
+- `/keranjang` keranjang belanja.
+- `/checkout` checkout dan pembayaran.
+- `/pesanan` riwayat pesanan.
+- `/admin/dashboard` dashboard admin.
+- `/admin/laporan` laporan penjualan.
+- `/admin/produk` manajemen produk.
+- `/admin/kategori` manajemen kategori.
+- `/admin/pengguna` manajemen pembeli.
+- `/admin/pesanan` manajemen pesanan.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Rancangan Database
 
-### Premium Partners
+### users
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| name | Nama pengguna |
+| username | Username unik |
+| email | Email pengguna |
+| password | Password terenkripsi |
+| role | `admin` atau `pembeli` |
+| timestamps | Waktu dibuat dan diperbarui |
 
-## Contributing
+### categories
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| name | Nama kategori |
+| slug | Slug unik kategori |
+| description | Deskripsi kategori |
+| is_active | Status kategori |
+| timestamps | Waktu dibuat dan diperbarui |
 
-## Code of Conduct
+### products
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| user_id | Penjual atau admin pembuat produk |
+| title | Nama produk |
+| category | Kategori produk |
+| slug | Slug produk |
+| description | Deskripsi produk |
+| seller_location | Lokasi penjual |
+| specifications | Spesifikasi dalam format JSON |
+| price | Harga produk |
+| discount_percent | Persentase diskon |
+| stock | Stok produk |
+| image_url | Foto produk |
+| is_active | Status tampil produk |
+| timestamps | Waktu dibuat dan diperbarui |
 
-## Security Vulnerabilities
+### cart_items
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| user_id | Pemilik keranjang |
+| product_id | Produk dalam keranjang |
+| quantity | Jumlah barang |
+| timestamps | Waktu dibuat dan diperbarui |
 
-## License
+### orders
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| user_id | Pembeli |
+| order_code | Kode pesanan unik |
+| subtotal | Total harga katalog |
+| discount_amount | Total diskon |
+| total | Total bayar |
+| payment_method | `online` atau `offline` |
+| payment_status | `pending`, `menunggu`, `lunas`, atau `cancelled` |
+| payment_note | Instruksi atau catatan pembayaran |
+| payment_proof_path | File bukti pembayaran |
+| shipping_status | Status pengiriman |
+| shipping_address | Alamat pengiriman |
+| tracking_number | Nomor resi |
+| timestamps | Waktu dibuat dan diperbarui |
+
+### order_items
+
+| Field | Keterangan |
+| --- | --- |
+| id | Primary key |
+| order_id | Pesanan |
+| product_id | Produk yang dibeli |
+| product_title | Nama produk saat transaksi |
+| quantity | Jumlah barang |
+| unit_price | Harga satuan |
+| discount_percent | Diskon saat transaksi |
+| line_total | Total per item |
+| timestamps | Waktu dibuat dan diperbarui |
+
+## Checklist Rubrik
+
+- Desain website: halaman toko, dashboard, admin, checkout, dan pesanan sudah dibuat.
+- Responsive: layout menggunakan grid dan breakpoint Tailwind.
+- Error handling: tersedia halaman 403, 404, dan 500.
+- Desain tabel database: tabel utama sudah dirancang melalui migration Laravel.
+- Halaman GitHub: README ini sudah berisi deskripsi fitur, rute halaman, cara menjalankan, dan rancangan database.
+
+## Catatan Screenshot
+
+Untuk memenuhi ketentuan pengumpulan, tambahkan screenshot halaman web dan screenshot struktur tabel database ke folder dokumentasi, lalu sisipkan di bagian ini sebelum dikirim ke Google Form.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Concerns\CreatesProducts;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,6 +35,8 @@ class ProductController extends Controller
             'storeRoute' => route('admin.products.store'),
             'backRoute' => route('admin.products.index'),
             'pageTitle' => 'Tambah produk (Admin)',
+            'categories' => Category::options(),
+            'product' => null,
         ]);
     }
 
@@ -43,6 +46,27 @@ class ProductController extends Controller
         $this->persistProduct($request, $data, (int) $request->user()->id);
 
         return redirect()->route('admin.products.index')->with('ok', 'Produk berhasil ditambahkan.');
+    }
+
+    public function edit(Product $product): View
+    {
+        return view('products.create', [
+            'layout' => 'layouts.admin',
+            'storeRoute' => route('admin.products.update', $product),
+            'backRoute' => route('admin.products.index'),
+            'pageTitle' => 'Edit produk',
+            'categories' => Category::options(),
+            'product' => $product,
+            'method' => 'PUT',
+        ]);
+    }
+
+    public function update(Request $request, Product $product): RedirectResponse
+    {
+        $data = $this->validateProductData($request);
+        $this->updateProduct($request, $product, $data);
+
+        return redirect()->route('admin.products.index')->with('ok', 'Produk berhasil diperbarui.');
     }
 
     public function toggle(Product $product): RedirectResponse

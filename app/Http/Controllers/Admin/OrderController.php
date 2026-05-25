@@ -13,16 +13,27 @@ class OrderController extends Controller
     public function index(Request $request): View
     {
         $status = $request->string('status')->toString();
+        $shipping = $request->string('shipping')->toString();
+        $q = $request->string('q')->trim();
 
         $orders = Order::query()
             ->with('user:id,name,username')
             ->withCount('items')
             ->when($status !== '', fn ($q) => $q->where('payment_status', $status))
+            ->when($shipping !== '', fn ($query) => $query->where('shipping_status', $shipping))
+            ->when($q->isNotEmpty(), function ($query) use ($q) {
+                $query->where(function ($inner) use ($q) {
+                    $inner->where('order_code', 'like', "%{$q}%")
+                        ->orWhereHas('user', fn ($userQuery) => $userQuery
+                            ->where('name', 'like', "%{$q}%")
+                            ->orWhere('username', 'like', "%{$q}%"));
+                });
+            })
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.orders.index', compact('orders', 'status'));
+        return view('admin.orders.index', compact('orders', 'status', 'shipping', 'q'));
     }
 
     public function show(Order $order): View

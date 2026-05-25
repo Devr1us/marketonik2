@@ -26,9 +26,11 @@
             <nav class="space-y-0.5 text-sm">
                 @foreach([
                     ['route' => 'admin.dashboard', 'label' => 'Dashboard', 'icon' => '📊', 'match' => 'admin.dashboard'],
+                    ['route' => 'admin.reports.index', 'label' => 'Laporan', 'icon' => '📈', 'match' => 'admin.reports.*'],
                     ['route' => 'admin.orders.index', 'label' => 'Pesanan', 'icon' => '🧾', 'match' => 'admin.orders.*'],
                     ['route' => 'admin.products.index', 'label' => 'Produk', 'icon' => '📦', 'match' => 'admin.products.index'],
                     ['route' => 'admin.products.create', 'label' => 'Tambah Produk', 'icon' => '➕', 'match' => 'admin.products.create'],
+                    ['route' => 'admin.kategori.index', 'label' => 'Kategori', 'icon' => '🏷️', 'match' => 'admin.kategori.*'],
                     ['route' => 'admin.users.index', 'label' => 'Pembeli', 'icon' => '👥', 'match' => 'admin.users.*'],
                 ] as $nav)
                 <a href="{{ route($nav['route']) }}" class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition {{ request()->routeIs($nav['match']) ? 'bg-violet-500/20 text-violet-100' : 'text-zinc-400 hover:bg-white/5 hover:text-white' }}">

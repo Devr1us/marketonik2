@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -54,6 +55,49 @@ class DashboardController extends Controller
             'salesChart'    => $salesChart,
             'lowStock'      => $lowStock,
             'categoryStats' => $categoryStats,
+        ]);
+    }
+
+    public function report(Request $request): View
+    {
+        $from = $request->date('from') ?: now()->subDays(30)->startOfDay();
+        $to = $request->date('to') ?: now()->endOfDay();
+
+        $orders = Order::query()
+            ->with('user:id,name,username')
+            ->withCount('items')
+            ->whereBetween('created_at', [$from, $to->copy()->endOfDay()])
+            ->latest()
+            ->get();
+
+        $dailySales = Order::query()
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as total_orders, SUM(total) as revenue')
+            ->whereBetween('created_at', [$from, $to->copy()->endOfDay()])
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy('date')
+            ->get();
+
+        $topProducts = DB::table('order_items')
+            ->join('orders', 'orders.id', '=', 'order_items.order_id')
+            ->selectRaw('product_title, SUM(quantity) as sold, SUM(line_total) as revenue')
+            ->whereBetween('orders.created_at', [$from, $to->copy()->endOfDay()])
+            ->groupBy('product_title')
+            ->orderByDesc('sold')
+            ->take(8)
+            ->get();
+
+        return view('admin.reports.index', [
+            'from' => $from,
+            'to' => $to,
+            'orders' => $orders,
+            'dailySales' => $dailySales,
+            'topProducts' => $topProducts,
+            'summary' => [
+                'orders' => $orders->count(),
+                'paid' => $orders->where('payment_status', 'lunas')->count(),
+                'revenue' => (float) $orders->where('payment_status', 'lunas')->sum('total'),
+                'gross' => (float) $orders->sum('total'),
+            ],
         ]);
     }
 }

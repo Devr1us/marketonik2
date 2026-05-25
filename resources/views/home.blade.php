@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Marketonik Luxe — Elektronik Premium')
+@section('title', 'Marketonik — Elektronik Premium')
 
 @section('content')
 

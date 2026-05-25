@@ -10,12 +10,21 @@
         <p class="text-sm text-zinc-500 mt-1">{{ $orders->total() }} pesanan ditemukan</p>
     </div>
     <form method="get" class="flex flex-wrap gap-2">
+        <input name="q" value="{{ $q }}" placeholder="Kode / pembeli" class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-sm text-zinc-300">
         <select name="status" class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-sm text-zinc-300">
             <option value="">Semua status</option>
             <option value="pending" @selected($status === 'pending')>Pending</option>
             <option value="menunggu" @selected($status === 'menunggu')>Menunggu</option>
             <option value="lunas" @selected($status === 'lunas')>Lunas</option>
             <option value="cancelled" @selected($status === 'cancelled')>Cancelled</option>
+        </select>
+        <select name="shipping" class="rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-sm text-zinc-300">
+            <option value="">Semua pengiriman</option>
+            <option value="menunggu" @selected($shipping === 'menunggu')>Menunggu</option>
+            <option value="diproses" @selected($shipping === 'diproses')>Diproses</option>
+            <option value="dikirim" @selected($shipping === 'dikirim')>Dikirim</option>
+            <option value="selesai" @selected($shipping === 'selesai')>Selesai</option>
+            <option value="dibatalkan" @selected($shipping === 'dibatalkan')>Dibatalkan</option>
         </select>
         <button class="rounded-xl bg-violet-600 px-4 py-2 text-xs font-bold text-white hover:bg-violet-500 transition">Filter</button>
     </form>

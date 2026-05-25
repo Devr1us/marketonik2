@@ -146,6 +146,11 @@
             @if($order->payment_note)
             <p class="mt-1 text-xs text-zinc-500">{{ $order->payment_note }}</p>
             @endif
+            @if($order->paymentProofUrl())
+            <a href="{{ $order->paymentProofUrl() }}" target="_blank" class="mt-3 inline-flex rounded-lg border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-200 hover:bg-amber-500/10">
+                Lihat Bukti Pembayaran
+            </a>
+            @endif
         </div>
 
         <div class="mt-5 flex flex-col gap-2">

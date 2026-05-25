@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -29,13 +30,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['shop.auth', 'admin'])->group(function () {
         Route::post('/keluar', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/laporan', [AdminDashboardController::class, 'report'])->name('reports.index');
         Route::get('/pengguna', [AdminUserController::class, 'index'])->name('users.index');
+        Route::get('/pengguna/{user}', [AdminUserController::class, 'show'])->name('users.show');
+        Route::get('/pengguna/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+        Route::put('/pengguna/{user}', [AdminUserController::class, 'update'])->name('users.update');
         Route::delete('/pengguna/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
         Route::get('/produk', [AdminProductController::class, 'index'])->name('products.index');
         Route::get('/produk/baru', [AdminProductController::class, 'create'])->name('products.create');
         Route::post('/produk', [AdminProductController::class, 'store'])->name('products.store');
+        Route::get('/produk/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+        Route::put('/produk/{product}', [AdminProductController::class, 'update'])->name('products.update');
         Route::patch('/produk/{product}/toggle', [AdminProductController::class, 'toggle'])->name('products.toggle');
         Route::delete('/produk/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+        Route::resource('kategori', AdminCategoryController::class)->except(['show']);
         Route::get('/pesanan', [AdminOrderController::class, 'index'])->name('orders.index');
         Route::get('/pesanan/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
         Route::patch('/pesanan/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.status');

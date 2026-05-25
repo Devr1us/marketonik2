@@ -17,6 +17,7 @@ class Order extends Model
         'payment_method',
         'payment_status',
         'payment_note',
+        'payment_proof_path',
         'shipping_status',
         'shipping_address',
         'tracking_number',
@@ -54,6 +55,15 @@ class Order extends Model
             'cancelled'     => 'text-rose-300 border-rose-500/30 bg-rose-500/10',
             default         => 'text-zinc-300 border-white/15',
         };
+    }
+
+    public function paymentProofUrl(): ?string
+    {
+        if (! $this->payment_proof_path) {
+            return null;
+        }
+
+        return asset('storage/'.$this->payment_proof_path);
     }
 
     protected function casts(): array

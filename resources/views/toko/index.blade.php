@@ -41,13 +41,13 @@
                     <label class="flex items-center gap-2 cursor-pointer group">
                         <input type="radio" name="kategori" value="" {{ !$kategori ? 'checked' : '' }} class="accent-amber-500" onchange="this.form.submit()">
                         <span class="text-sm {{ !$kategori ? 'text-amber-300 font-semibold' : 'text-zinc-400 group-hover:text-white' }}">Semua</span>
-                        <span class="ml-auto text-[10px] text-zinc-600">{{ array_sum($kategoryCounts) }}</span>
+                        <span class="ml-auto text-[10px] text-zinc-600">{{ array_sum($categoryCounts) }}</span>
                     </label>
                     @foreach(\App\Models\Product::CATEGORIES as $cat)
                     <label class="flex items-center gap-2 cursor-pointer group">
                         <input type="radio" name="kategori" value="{{ $cat }}" {{ $kategori === $cat ? 'checked' : '' }} class="accent-amber-500" onchange="this.form.submit()">
                         <span class="text-sm {{ $kategori === $cat ? 'text-amber-300 font-semibold' : 'text-zinc-400 group-hover:text-white' }}">{{ $cat }}</span>
-                        <span class="ml-auto text-[10px] text-zinc-600">{{ $kategoryCounts[$cat] ?? 0 }}</span>
+                        <span class="ml-auto text-[10px] text-zinc-600">{{ $categoryCounts[$cat] ?? 0 }}</span>
                     </label>
                     @endforeach
                 </div>

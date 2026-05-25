@@ -5,7 +5,7 @@
 @section('content')
 <div class="mx-auto max-w-lg rounded-2xl border border-white/10 bg-white text-zinc-900 p-8 shadow-2xl print:border-0 print:shadow-none print:p-0">
     <div class="text-center">
-        <p class="font-display text-2xl font-extrabold">Marketonik Luxe</p>
+        <p class="font-display text-2xl font-extrabold">Marketonik</p>
         <p class="text-xs text-zinc-500">Struk pembayaran / pesanan</p>
     </div>
     <hr class="my-6 border-zinc-200">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Marketonik Luxe') — Elektronik Premium</title>
+    <title>@yield('title', 'Marketonik') — Elektronik Premium</title>
     <link rel="icon" href="{{ asset('images/marketonik-logo.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700|syne:500,600,700,800" rel="stylesheet">
@@ -194,7 +194,7 @@
                         <p>Pengiriman ke seluruh Indonesia</p>
                         <p>Garansi produk resmi</p>
                         <p>Pembayaran aman & terenkripsi</p>
-                        <p class="mt-4 text-zinc-600">© {{ date('Y') }} Marketonik Luxe</p>
+                        <p class="mt-4 text-zinc-600">© {{ date('Y') }} Marketonik</p>
                     </div>
                 </div>
             </div>
