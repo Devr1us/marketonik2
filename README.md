@@ -295,4 +295,55 @@ php artisan serve
 
 ## Catatan Screenshot
 
-Untuk memenuhi ketentuan pengumpulan, tambahkan screenshot halaman web dan screenshot struktur tabel database ke folder dokumentasi, lalu sisipkan di bagian ini sebelum dikirim ke Google Form.
+### 📸 Database Screenshots (Adminer)
+
+Database Marketonik telah berhasil disetup dengan struktur tabel lengkap dan data seeder:
+
+**Database Overview:**
+- Total 14 tabel dalam database `marketonik`
+- MySQL 8.4.3 via Laragon
+- Password: `marketonik123`
+
+**Tabel & Data:**
+- ✅ **users** (4 records) - 1 admin + 3 pembeli
+- ✅ **products** (100 records) - 100+ produk elektronik seeded
+- ✅ **categories** (8 records) - 8 kategori produk
+- ✅ **orders** - Siap untuk transaksi
+- ✅ **order_items** - Detail order items
+- ✅ **cart_items** - Keranjang belanja
+- ✅ **migrations** (14 records) - Semua migration sudah dijalankan
+- ✅ **sessions, cache, jobs, etc** - Support tables
+
+**Screenshots Tersedia:**
+- Database overview (14 tabel)
+- Struktur tabel: cache, cache_locks, cart_items, categories
+- Struktur tabel: failed_jobs, job_batches, jobs, migrations
+- Struktur tabel: order_items, orders, password_reset_tokens, products
+- Struktur tabel: sessions, users
+
+### Cara Akses Database
+
+**Via Web (Adminer):**
+```
+URL: http://localhost:8000/adminer.php
+Username: root
+Password: marketonik123
+Database: marketonik
+```
+
+**Via CLI (Tinker):**
+```bash
+php artisan tinker
+>>> DB::table('products')->count()  // 100
+>>> DB::table('users')->count()     // 4
+>>> DB::table('categories')->count() // 8
+```
+
+---
+
+**Status: HAMPIR SELESAI ✨**
+- ✅ Database migration & seeding selesai
+- ✅ Adminer setup untuk web access
+- ✅ Password MySQL sudah di-set
+- ✅ Struktur tabel verified di Adminer
+- ⏳ Menunggu web UI screenshots untuk dokumentasi lengkap
