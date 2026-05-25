@@ -315,11 +315,51 @@ Database Marketonik telah berhasil disetup dengan struktur tabel lengkap dan dat
 - ✅ **sessions, cache, jobs, etc** - Support tables
 
 **Screenshots Tersedia:**
-- Database overview (14 tabel)
-- Struktur tabel: cache, cache_locks, cart_items, categories
-- Struktur tabel: failed_jobs, job_batches, jobs, migrations
-- Struktur tabel: order_items, orders, password_reset_tokens, products
-- Struktur tabel: sessions, users
+
+#### Database Overview (Adminer - 14 Tabel)
+![Adminer Database Overview](screenshots/01-database-overview.png)
+
+#### Tabel: Cache
+![Cache Table](screenshots/02-table-cache.png)
+
+#### Tabel: Cache Locks
+![Cache Locks Table](screenshots/03-table-cache-locks.png)
+
+#### Tabel: Cart Items
+![Cart Items Table](screenshots/04-table-cart-items.png)
+
+#### Tabel: Categories
+![Categories Table](screenshots/05-table-categories.png)
+
+#### Tabel: Failed Jobs
+![Failed Jobs Table](screenshots/06-table-failed-jobs.png)
+
+#### Tabel: Job Batches
+![Job Batches Table](screenshots/07-table-job-batches.png)
+
+#### Tabel: Jobs
+![Jobs Table](screenshots/08-table-jobs.png)
+
+#### Tabel: Migrations
+![Migrations Table](screenshots/09-table-migrations.png)
+
+#### Tabel: Order Items
+![Order Items Table](screenshots/10-table-order-items.png)
+
+#### Tabel: Orders
+![Orders Table](screenshots/11-table-orders.png)
+
+#### Tabel: Password Reset Tokens
+![Password Reset Tokens Table](screenshots/12-table-password-reset-tokens.png)
+
+#### Tabel: Products
+![Products Table](screenshots/13-table-products.png)
+
+#### Tabel: Sessions
+![Sessions Table](screenshots/14-table-sessions.png)
+
+#### Tabel: Users
+![Users Table](screenshots/15-table-users.png)
 
 ### Cara Akses Database
 
