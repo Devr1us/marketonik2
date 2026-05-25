@@ -295,95 +295,45 @@ php artisan serve
 
 ## Catatan Screenshot
 
-### 📸 Database Screenshots (Adminer)
+### 📸 Screenshots
 
-Database Marketonik telah berhasil disetup dengan struktur tabel lengkap dan data seeder:
+#### 🌐 Halaman Website (Pembeli)
 
-**Database Overview:**
-- Total 14 tabel dalam database `marketonik`
-- MySQL 8.4.3 via Laragon
-- Password: `marketonik123`
+![Web 1](screenshoots/web1.png)
+![Web 2](screenshoots/web2.png)
+![Web 3](screenshoots/web3.png)
+![Web 4](screenshoots/web4.png)
+![Web 5](screenshoots/web5.png)
+![Web 6](screenshoots/web6.png)
+![Web 7](screenshoots/web7.png)
+![Web 8](screenshoots/web8.png)
+![Web 9](screenshoots/web9.png)
+![Web 10](screenshoots/web10.png)
 
-**Tabel & Data:**
-- ✅ **users** (4 records) - 1 admin + 3 pembeli
-- ✅ **products** (100 records) - 100+ produk elektronik seeded
-- ✅ **categories** (8 records) - 8 kategori produk
-- ✅ **orders** - Siap untuk transaksi
-- ✅ **order_items** - Detail order items
-- ✅ **cart_items** - Keranjang belanja
-- ✅ **migrations** (14 records) - Semua migration sudah dijalankan
-- ✅ **sessions, cache, jobs, etc** - Support tables
+#### 🛠️ Halaman Admin
 
-**Screenshots Tersedia:**
+![Admin 1](screenshoots/webadmin1.png)
+![Admin 2](screenshoots/webadmin2.png)
+![Admin 3](screenshoots/webadmin3.png)
+![Admin 4](screenshoots/webadmin4.png)
+![Admin 5](screenshoots/webadmin5.png)
+![Admin 6](screenshoots/webadmin6.png)
+![Admin 7](screenshoots/webadmin7.png)
 
-#### Database Overview (Adminer - 14 Tabel)
-![Adminer Database Overview](screenshots/01-database-overview.png)
+#### 🗄️ Database (Adminer)
 
-#### Tabel: Cache
-![Cache Table](screenshots/02-table-cache.png)
-
-#### Tabel: Cache Locks
-![Cache Locks Table](screenshots/03-table-cache-locks.png)
-
-#### Tabel: Cart Items
-![Cart Items Table](screenshots/04-table-cart-items.png)
-
-#### Tabel: Categories
-![Categories Table](screenshots/05-table-categories.png)
-
-#### Tabel: Failed Jobs
-![Failed Jobs Table](screenshots/06-table-failed-jobs.png)
-
-#### Tabel: Job Batches
-![Job Batches Table](screenshots/07-table-job-batches.png)
-
-#### Tabel: Jobs
-![Jobs Table](screenshots/08-table-jobs.png)
-
-#### Tabel: Migrations
-![Migrations Table](screenshots/09-table-migrations.png)
-
-#### Tabel: Order Items
-![Order Items Table](screenshots/10-table-order-items.png)
-
-#### Tabel: Orders
-![Orders Table](screenshots/11-table-orders.png)
-
-#### Tabel: Password Reset Tokens
-![Password Reset Tokens Table](screenshots/12-table-password-reset-tokens.png)
-
-#### Tabel: Products
-![Products Table](screenshots/13-table-products.png)
-
-#### Tabel: Sessions
-![Sessions Table](screenshots/14-table-sessions.png)
-
-#### Tabel: Users
-![Users Table](screenshots/15-table-users.png)
-
-### Cara Akses Database
-
-**Via Web (Adminer):**
-```
-URL: http://localhost:8000/adminer.php
-Username: root
-Password: marketonik123
-Database: marketonik
-```
-
-**Via CLI (Tinker):**
-```bash
-php artisan tinker
->>> DB::table('products')->count()  // 100
->>> DB::table('users')->count()     // 4
->>> DB::table('categories')->count() // 8
-```
-
----
-
-**Status: HAMPIR SELESAI ✨**
-- ✅ Database migration & seeding selesai
-- ✅ Adminer setup untuk web access
-- ✅ Password MySQL sudah di-set
-- ✅ Struktur tabel verified di Adminer
-- ⏳ Menunggu web UI screenshots untuk dokumentasi lengkap
+![Database 1](screenshoots/marketonik1.png)
+![Database 2](screenshoots/marketonik2.png)
+![Database 3](screenshoots/marketonik3.png)
+![Database 4](screenshoots/marketonik4.png)
+![Database 5](screenshoots/marketonik5.png)
+![Database 6](screenshoots/marketonik6.png)
+![Database 7](screenshoots/marketonik7.png)
+![Database 8](screenshoots/marketonik8.png)
+![Database 9](screenshoots/marketonik9.png)
+![Database 10](screenshoots/marketonik10.png)
+![Database 11](screenshoots/marketonik11.png)
+![Database 12](screenshoots/marketonik12.png)
+![Database 13](screenshoots/marketonik13.png)
+![Database 14](screenshoots/marketonik14.png)
+![Database 15](screenshoots/marketonik15.png)
